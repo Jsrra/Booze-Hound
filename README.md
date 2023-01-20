@@ -1,7 +1,8 @@
 # Project-1
 
-As an avid/frequent traveler,
+## User Story
+AS AN avid traveler who loves to visit places around the world,
 
-I want to know the know the weather of my intended destination during my defined time frame,
+I WANT to have critical information about potential travel destinations such as the weather forecast, top-rated restaurants, and famous tourist sites,
 
-so that I can decide if I should go.
+SO THAT I can make better informed decisions when planning for trips.

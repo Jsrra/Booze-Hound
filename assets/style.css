@@ -19,6 +19,6 @@
 
 /* map.html */
 #map {
-    height: 180px;
+    height: 70vh;
     background-color: var(--color-map-background-1);
 }

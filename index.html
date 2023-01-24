@@ -5,15 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
     <title>Document</title>
 </head>
 
 <body>
+    <div>
+        <nav class="hero">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Booze Hound</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href=".html">City</a></li>
+                    <li><a href=".html">Weather</a></li>
+                    <li><a href=".html">Map</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" placeholder="Search"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- CDN resource -->
-  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-  
-  <script src="./assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+    <script src="./assets/script.js"></script>
 </body>
 
 </html>

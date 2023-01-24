@@ -1,19 +1,9 @@
 # Project-1
 
-## User stories
+## User Story
 
-As an avid/frequent traveler,
+AS A person that enjoys a beer every now and then and who loves to discover new bars,
 
-I want to know the know the weather of my intended destination during my defined time frame,
+I WANT to be able to search for bars in a specified city and have their locations be displayed on a map,
 
-so that I can decide if I should go.
-
-
-// apis: 
-// https://leafletjs.com/index.html
-// https://www.openbrewerydb.org/documentation
-// https://openweathermap.org/forecast5#5days
-
-
-// https://developer-tripadvisor.com/home/
-// https://rapidapi.com/apidojo/api/travel-advisor/
+SO THAT I can make better informed decisions while deciding which bar to patronize.

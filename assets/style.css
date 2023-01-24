@@ -22,3 +22,10 @@
     height: 70vh;
     background-color: var(--color-map-background-1);
 }
+
+.beer-popup {
+    background-color: rgb(175, 5, 5);
+    color: whitesmoke;
+    border-radius: 5px;
+    padding-right: 0.4rem;
+  }

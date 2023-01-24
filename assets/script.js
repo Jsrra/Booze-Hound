@@ -16,13 +16,33 @@ if (navigator.geolocation)
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    L.marker(currentCords).addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-      .openPopup();
+    
+      //use Leaflet method `on()`
+      map.on('click', function(mEvent){
+        console.log(mEvent);
+        const lat = mEvent.latlng.lat;
+        const lng = mEvent.latlng.lng;
+        // const {lat, lng} = mEvent.latlng;
 
+        L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup( L.popup({
+          maxWidth: 260,
+          minWidth: 90,
+          autoClose: false,
+          closeOnClick: false,
+          className: 'beer-popup',
+          
+        }))
+        .setPopupContent('Beer Bar')
+        .openPopup();
+        });
+      // console.log(on);
 
   }, function () {
     alert('It cannot find the current location.');
   });
+
+
 
 // console.log('test');

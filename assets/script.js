@@ -43,6 +43,30 @@ if (navigator.geolocation)
     alert('It cannot find the current location.');
   });
 
+// <<<< openbrewerydb.org API >>>>>>
 
+function getListBreweries () {
+  //List Breweries -->by_city and by_state
+  const base = 'https://api.openbrewerydb.org/breweries';
+  
+  const query = `?by_city=Brooklyn&by_state=new_york&per_page=20`;
 
-// console.log('test');
+  //Search Breweries
+  // const base = https://api.openbrewerydb.org/breweries/search?query={search};
+  // 
+
+  const requestUrl = base + query;
+
+  fetch(requestUrl)
+    .then(function (response){
+      return response.json();
+    })
+    .then(function (data){
+      console.log(data);
+    })
+    .then(function (data){
+
+    })
+    return;
+}
+getListBreweries ()

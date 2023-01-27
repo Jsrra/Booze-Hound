@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Leaflet API CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link rel="stylesheet" href="i.css">
+    <title>Leaflet Map</title>
+</head>
+
+<body>
+    <main>
+        <section class="side-bar">
+            <form class="" action="submit">
+                <label class="text-secondery" for="city-input">
+                    <h4> Search for a Bar in a City </h4>
+                </label>
+                <input id="city-input" type="text" name="city" class="" placeholder="enter a city">
+                <button class="btn btn-primary btn-lg my-1 search-button" type="submit" id="search-btn">Search</button>
+                <button type="button" class="btn btn-secondary btn-lg">Clear</button>
+            </form>
+        </section>
+        <figure id="map"></figure>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="i.js"></script>
+</body>
+
+</html>

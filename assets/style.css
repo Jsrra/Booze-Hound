@@ -1,12 +1,16 @@
-#hero {
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./bars.webp);
     width: 100%;
-    height: 80vh;
-    background-image: url(./bars.webp);
-    display: flex;
+    font-family: 'Roboto Slab', serif;
+    color: #F5F5ED;
 }
 
-.search {
+.maps {
     display: flex;
+    margin: 1%;
     justify-content: center;
-    align-items: center;
+}
+
+button {
+    font-family: 'Roboto Slab', serif;
 }

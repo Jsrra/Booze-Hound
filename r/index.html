@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
-    <title>Document</title>
+    <title>Booze-Hound</title>
 </head>
 
 <body>
@@ -76,20 +76,34 @@
                 </div>
             </div>
         </div>
-        <div><input /></div>
-        <button class="search-city">Search City</button>
+        <div class="hide show-input"><input /></div>
+        <button class="hide show-button search-city">Search City</button>
     </div>
 
     <img src="bar.jpg" alt="">
     <section>
-        <div id="search-feedBack" class="hide">No Brew Found</div>
+        <div id="search-feedBack" class="hide">No City/Brewies Found</div>
         <div id="brewName1"></div>
         <div id="brewAddress1"></div>
         <section id="address">
             <div id="brewCity1"></div>
             <div id="brewState1"></div>
         </section>
+
     </section>
+    <section>
+        <div id="search-feedBack" class="hide">
+            <h1>No Breweries Found</h1>
+        </div>
+        <div id="brewName1"></div>
+        <div id="brewAddress1"></div>
+        <section id="address">
+            <div id="brewCity1"></div>
+            <div id="brewState1"></div>
+        </section>
+        <div id="breweryList"></div>
+    </section>
+
 
     <script src="./assets/script.js"></script>
 </body>

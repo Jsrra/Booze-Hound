@@ -4,14 +4,17 @@ let barLon = "";
 document.getElementById("submit").addEventListener("click", function (event) {
     event.preventDefault();
     var city = document.getElementById("city").value;
+    saveToStorage(city)
     fetch("https://api.openbrewerydb.org/breweries?by_city=" + city)
         .then(function (response) {
+
             return response.json();
+
             barLat = data[0].latitude
             barLon = data[0].longitude
 
         })
-        .then(function (breweries) {
+        .then(function render(breweries) {
             var results = document.getElementById("results");
             results.innerHTML = "";
             for (var i = 0; i < breweries.length; i++) {
@@ -62,7 +65,9 @@ document.getElementById("submit").addEventListener("click", function (event) {
                     "<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>" +
                     "</div>" +
                     "</div>";
+
             }
+            createButtons();
             var modals = document.querySelectorAll(".modal");
             M.Modal.init(modals);
         });
@@ -99,7 +104,7 @@ if (navigator.geolocation)
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        console.log(barLat, bar)
+        // console.log(barLat, bar)
         L.marker([barLat, barLon])
             .addTo(map)
             .bindPopup(L.popup({
@@ -128,3 +133,23 @@ if (navigator.geolocation)
     }, function () {
         alert('It cannot find the current location.');
     });
+
+const searchHistory = document.querySelector("#search-history")
+var savedCities = JSON.parse(localStorage.getItem("saved-city")) || []
+function saveToStorage(cityName) {
+    savedCities.push(cityName)
+    localStorage.setItem("saved-city", JSON.stringify(savedCities))
+}
+function createButtons() {
+    for (i = 0; i < savedCities.length; i++) {
+        var newButton = document.createElement("button")
+        newButton.textContent = savedCities[i]
+        newButton.addEventListener("click", function () {
+            console.log(this.textContent)
+            render(this.textContent)
+        })
+        searchHistory.append(newButton)
+    }
+
+}
+;

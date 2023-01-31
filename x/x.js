@@ -3,12 +3,11 @@ let barLon = "";
 
 document.getElementById("submit").addEventListener("click", handleSearchSubmit)
 
-
-
-
 function handleSearchSubmit(event) {
     event.preventDefault();
     var city = document.getElementById("city").value;
+    city.trim();
+    console.log(city);    
     search(city)
 }
 function search(city) {
@@ -17,7 +16,7 @@ function search(city) {
         return
     }
     saveToStorage(city)
-    fetch("https://api.openbrewerydb.org/breweries?by_city=" + city)
+    fetch("https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=3")
         .then(function (response) {
 
             return response.json();
@@ -30,8 +29,16 @@ function search(city) {
         .then(function render(breweries) {
             console.log(breweries)
             console.log(breweries[0].latitude)
-            console.log(breweries[0].longitude)
+            console.log(breweries[0].longitude);
+            // if (breweries === null || 
+            //     !breweries[0].latitude || breweries[0].latitude === 'null'
+            //     || !breweries[0].longitude || breweries[0].longitude === 'null'
+            //     || !breweries[0].name || breweries[0].name==='') {
+            //     return; 
+                // alert ("Coords cannnot be found.")
+            
             geoLocation(breweries[0].latitude, breweries[0].longitude, breweries[0].name);
+        
             // var buttonValue = {
             //     longitude: breweries[i].longitude, 
             //     latitude: breweries[i].latitude,
@@ -42,6 +49,12 @@ function search(city) {
             var results = document.getElementById("results");
             results.innerHTML = "";
             for (var i = 0; i < breweries.length; i++) {
+                // if (breweries === null || 
+                //     !breweries[0].latitude || breweries[0].latitude === 'null'
+                //     || !breweries[0].longitude || breweries[0].longitude === 'null'
+                //     || !breweries[0].name || breweries[0].name==='') {
+                //     continue; 
+                //     }
                 var buttonValue = {
                     longitude: breweries[i].longitude,
                     latitude: breweries[i].latitude,
@@ -130,11 +143,23 @@ searchForm.appendChild(resetButton);
 // Add a click event listener to the "Reset" button
 resetButton.addEventListener("click", function (event) {
     event.preventDefault();
-    searchInput.value = "";
+    searchInput.value = ""; 
+    results.innerHTML = '';   
+    localStorage.clear();
     searchInput.focus();
+    map = map.off();
+    map = map.remove();
+    location.reload();
 });
 
+
+
 let map;
+
+    // map = map.off();
+    // map = map.remove();
+
+// map.off();
 function geoLocation(longitude, latitude, barName) {
 
     // navigator.geolocation.getCurrentPosition(function (myPosition) {
@@ -143,48 +168,49 @@ function geoLocation(longitude, latitude, barName) {
     //     const lon = myPosition.coords.longitude;
     //     console.log(lat, lon);
 
-        const currentCords = [longitude, latitude];
-        // if (map) {
-        //     map.remove();
-        // }
-        // let exam = document.querySelector('#map');
-        // exam.innerHTML = '';
+    const currentCords = [longitude, latitude];
+    // if (map) {
+    //     map = map.off();
+    //     map = map.remove();
+    // }
+    let exam = document.querySelector('#map');
+    exam.innerHTML = '';
 
 
-        if (map) {
-            //  map = map.off();
-            map = map.remove();
-        }
-        // map.off();
-        map = L.map('map').setView(currentCords, 15);
+    if (map) {
+        //  map = map.off();
+        map = map.remove();
+    }
+    // map.off();
+    map = L.map('map').setView(currentCords, 15);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        // console.log(barLat, bar)
-        L.marker([longitude, latitude])
-            .addTo(map)
-            .bindPopup(L.popup({
-                maxWidth: 260,
-                minWidth: 90,
-                autoClose: false,
-                closeOnClick: false,
-                className: 'beer-popup',
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    // console.log(barLat, bar)
+    L.marker([longitude, latitude])
+        .addTo(map)
+        .bindPopup(L.popup({
+            maxWidth: 260,
+            minWidth: 90,
+            autoClose: false,
+            closeOnClick: false,
+            className: 'beer-popup',
 
-            }))
-            .setPopupContent(barName)
-            .openPopup();
-        // const latitude = data.list
+        }))
+        .setPopupContent(barName)
+        .openPopup();
+    // const latitude = data.list
 
-        //use Leaflet method `on()`
-        map.on('click', function (mEvent) {
-            console.log(mEvent);
-            const lat = mEvent.latlng.lat;
-            const lng = mEvent.latlng.lng;
-            // const {lat, lng} = mEvent.latlng;
+    //use Leaflet method `on()`
+    map.on('click', function (mEvent) {
+        console.log(mEvent);
+        const lat = mEvent.latlng.lat;
+        const lng = mEvent.latlng.lng;
+        // const {lat, lng} = mEvent.latlng;
 
-        });
-        // console.log(on);
+    });
+    // console.log(on);
 
     // }, function () {
     //     alert('It cannot find the current location.');
@@ -234,6 +260,7 @@ function handleMapSearch(event) {
     event.preventDefault();
     console.log(event.target.value);
     const value = JSON.parse(event.target.value);
+    console.log(value.longitude, value.latitude, value.barName);
     geoLocation(value.longitude, value.latitude, value.barName);
 
 }
@@ -241,3 +268,53 @@ function handleMapSearch(event) {
 
 // mapBtn.addEventListener('click', handleMapSearch)
 
+// window.onload = function () {
+//     if (navigator.geolocation)
+//         navigator.geolocation.getCurrentPosition(function (myPosition) {
+
+//             const lat = myPosition.coords.latitude;
+//             const lon = myPosition.coords.longitude;
+//             // console.log(lat, lon);
+
+//             const currentCords = [lat, lon];
+
+//             var map = L.map('map').setView(currentCords, 15);
+
+//             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//             }).addTo(map);
+
+
+//             // const latitude = data.list
+
+//             //use Leaflet method `on()`
+//             map.on('click', function (mEvent) {
+//                 console.log(mEvent);
+//                 const lat = mEvent.latlng.lat;
+//                 const lng = mEvent.latlng.lng;
+//                 // const {lat, lng} = mEvent.latlng;
+
+//                 L.marker([lat, lng])
+//                     .addTo(map)
+//                     .bindPopup(L.popup({
+//                         maxWidth: 260,
+//                         minWidth: 90,
+//                         autoClose: false,
+//                         closeOnClick: false,
+//                         className: 'beer-popup',
+
+//                     }))
+//                     .setPopupContent('Beer Bar')
+//                     .openPopup();
+//             });
+//             // console.log(on);
+
+//         }, function () {
+//             alert('The current location is not available.');
+//         });
+// }
+
+// var map;
+
+//     map = map.off();
+//     map = map.remove();

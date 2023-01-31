@@ -190,3 +190,4 @@ function recallHistory(event) {
     search(event.target.value)
 }
 searchHistory.addEventListener("click", recallHistory)
+// cool

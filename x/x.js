@@ -1,17 +1,37 @@
 let barLat = "";
 let barLon = "";
 
-document.getElementById("submit").addEventListener("click", function (event) {
+document.getElementById("submit").addEventListener("click", handleSearchSubmit)
+
+
+
+
+function handleSearchSubmit(event) {
     event.preventDefault();
     var city = document.getElementById("city").value;
+    search(city)
+}
+function search(city) {
+
+    if (!city) {
+        return
+    }
+    saveToStorage(city)
     fetch("https://api.openbrewerydb.org/breweries?by_city=" + city)
         .then(function (response) {
+
             return response.json();
+
             barLat = data[0].latitude
             barLon = data[0].longitude
+            console.log(barLat, barLon)
 
         })
-        .then(function (breweries) {
+        .then(function render(breweries) {
+            console.log(breweries)
+            console.log(breweries[0].latitude)
+            console.log(breweries[0].longitude)
+            geoLocation(breweries[0].latitude, breweries[0].longitude, breweries[0].name)
             var results = document.getElementById("results");
             results.innerHTML = "";
             for (var i = 0; i < breweries.length; i++) {
@@ -62,11 +82,13 @@ document.getElementById("submit").addEventListener("click", function (event) {
                     "<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>" +
                     "</div>" +
                     "</div>";
+
             }
+            createButtons();
             var modals = document.querySelectorAll(".modal");
             M.Modal.init(modals);
         });
-});
+};
 // Get references to the search form and input field
 var searchForm = document.querySelector("form");
 var searchInput = document.querySelector("input[type='text']");
@@ -85,22 +107,23 @@ resetButton.addEventListener("click", function (event) {
     searchInput.focus();
 });
 
-if (navigator.geolocation)
+function geoLocation(longitude, latitude, barName) {
+
     navigator.geolocation.getCurrentPosition(function (myPosition) {
 
         const lat = myPosition.coords.latitude;
         const lon = myPosition.coords.longitude;
-        // console.log(lat, lon);
+        console.log(lat, lon);
 
-        const currentCords = [lat, lon];
+        const currentCords = [longitude, latitude];
 
         const map = L.map('map').setView(currentCords, 15);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        console.log(barLat, bar)
-        L.marker([barLat, barLon])
+        // console.log(barLat, bar)
+        L.marker([longitude, latitude])
             .addTo(map)
             .bindPopup(L.popup({
                 maxWidth: 260,
@@ -110,7 +133,7 @@ if (navigator.geolocation)
                 className: 'beer-popup',
 
             }))
-            .setPopupContent('Beer Bar')
+            .setPopupContent(barName)
             .openPopup();
         // const latitude = data.list
 
@@ -127,4 +150,43 @@ if (navigator.geolocation)
 
     }, function () {
         alert('It cannot find the current location.');
-    });
+    })
+}
+
+const searchHistory = document.querySelector("#search-history")
+
+function saveToStorage(cityName) {
+    var savedCities = JSON.parse(localStorage.getItem("saved-city")) || []
+    console.log(savedCities.includes(cityName))
+    if (savedCities.includes(cityName)) {
+        return 0;
+    }
+    savedCities.push(cityName)
+    localStorage.setItem("saved-city", JSON.stringify(savedCities))
+}
+function createButtons() {
+    searchHistory.innerHTML = ""
+    var savedCities = JSON.parse(localStorage.getItem("saved-city")) || []
+    for (i = 0; i < savedCities.length; i++) {
+        var newButton = document.createElement("button")
+        newButton.textContent = savedCities[i]
+        newButton.value = savedCities[i]
+
+        // newButton.addEventListener("click", function () {
+        //     console.log(this.textContent)
+        //     render(this.textContent)
+        // })
+        searchHistory.append(newButton)
+    }
+
+}
+;
+function recallHistory(event) {
+    event.preventDefault();
+    console.log(event)
+    console.log(event.target)
+    console.log(event.target.innerHTML)
+    search(event.target.value)
+}
+searchHistory.addEventListener("click", recallHistory)
+// cool

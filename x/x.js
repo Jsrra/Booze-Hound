@@ -7,7 +7,7 @@ function handleSearchSubmit(event) {
     event.preventDefault();
     var city = document.getElementById("city").value;
     city.trim();
-    console.log(city);    
+    console.log(city);
     search(city)
 }
 function search(city) {
@@ -16,7 +16,7 @@ function search(city) {
         return
     }
     saveToStorage(city)
-    fetch("https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=3")
+    fetch("https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=5")
         .then(function (response) {
 
             return response.json();
@@ -35,10 +35,10 @@ function search(city) {
             //     || !breweries[0].longitude || breweries[0].longitude === 'null'
             //     || !breweries[0].name || breweries[0].name==='') {
             //     return; 
-                // alert ("Coords cannnot be found.")
-            
+            // alert ("Coords cannnot be found.")
+
             geoLocation(breweries[0].latitude, breweries[0].longitude, breweries[0].name);
-        
+
             // var buttonValue = {
             //     longitude: breweries[i].longitude, 
             //     latitude: breweries[i].latitude,
@@ -143,8 +143,8 @@ searchForm.appendChild(resetButton);
 // Add a click event listener to the "Reset" button
 resetButton.addEventListener("click", function (event) {
     event.preventDefault();
-    searchInput.value = ""; 
-    results.innerHTML = '';   
+    searchInput.value = "";
+    results.innerHTML = '';
     localStorage.clear();
     searchInput.focus();
     map = map.off();
@@ -156,8 +156,8 @@ resetButton.addEventListener("click", function (event) {
 
 let map;
 
-    // map = map.off();
-    // map = map.remove();
+// map = map.off();
+// map = map.remove();
 
 // map.off();
 function geoLocation(longitude, latitude, barName) {
@@ -261,7 +261,7 @@ function handleMapSearch(event) {
     console.log(event.target.value);
     const value = JSON.parse(event.target.value);
     console.log(value.longitude, value.latitude, value.barName);
-    geoLocation(value.longitude, value.latitude, value.barName);
+    geoLocation( value.latitude, value.longitude, value.barName);
 
 }
 // var mapBtn = document.querySelectorAll('.look-up-map');

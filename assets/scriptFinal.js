@@ -182,7 +182,7 @@ function geoLocation(longitude, latitude, barName) {
         map = map.remove();
     }
     // map.off();
-    map = L.map('map').setView(currentCords, 15);
+    map = L.map('map').setView(currentCords, 17);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

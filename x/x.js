@@ -43,9 +43,9 @@ function search(city) {
             results.innerHTML = "";
             for (var i = 0; i < breweries.length; i++) {
                 var buttonValue = {
-                    longitude: breweries[i].longitude, 
+                    longitude: breweries[i].longitude,
                     latitude: breweries[i].latitude,
-                    barName: breweries[i].name,   
+                    barName: breweries[i].name,
                 }
                 buttonValue = JSON.stringify(buttonValue);
                 console.log('buttonValue :>> ', buttonValue);
@@ -71,7 +71,7 @@ function search(city) {
                     "<a class='modal-trigger' href='#modal" +
                     i +
                     "'>More info</a>" +
-                    `<button value = '${buttonValue}' class = 'look-up-map'> Show Map </button>`+
+                    `<button value = '${buttonValue}' class = 'look-up-map'> Show Map </button>` +
                     "</div>" +
                     "</div>" +
                     "<div id='modal" +
@@ -111,7 +111,7 @@ function search(city) {
                 if (document.addEventListener) {
                     mapBtn[index].addEventListener('click', handleMapSearch)
                 }
-                
+
             }
             console.log(mapBtn)
         });
@@ -134,13 +134,14 @@ resetButton.addEventListener("click", function (event) {
     searchInput.focus();
 });
 
+let map;
 function geoLocation(longitude, latitude, barName) {
 
-    navigator.geolocation.getCurrentPosition(function (myPosition) {
+    // navigator.geolocation.getCurrentPosition(function (myPosition) {
 
-        const lat = myPosition.coords.latitude;
-        const lon = myPosition.coords.longitude;
-        console.log(lat, lon);
+    //     const lat = myPosition.coords.latitude;
+    //     const lon = myPosition.coords.longitude;
+    //     console.log(lat, lon);
 
         const currentCords = [longitude, latitude];
         // if (map) {
@@ -148,11 +149,12 @@ function geoLocation(longitude, latitude, barName) {
         // }
         // let exam = document.querySelector('#map');
         // exam.innerHTML = '';
-        
-        let map;
+
+
         if (map) {
-             map.off();
-            }
+            //  map = map.off();
+            map = map.remove();
+        }
         // map.off();
         map = L.map('map').setView(currentCords, 15);
 
@@ -184,9 +186,9 @@ function geoLocation(longitude, latitude, barName) {
         });
         // console.log(on);
 
-    }, function () {
-        alert('It cannot find the current location.');
-    })
+    // }, function () {
+    //     alert('It cannot find the current location.');
+    // })
 }
 
 const searchHistory = document.querySelector("#search-history")
@@ -227,7 +229,7 @@ function recallHistory(event) {
 searchHistory.addEventListener("click", recallHistory)
 // cool
 
-function handleMapSearch (event){
+function handleMapSearch(event) {
     console.log('test :>> ', 'test');
     event.preventDefault();
     console.log(event.target.value);

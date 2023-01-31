@@ -1,16 +1,1 @@
-body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./bars.webp);
-    width: 100%;
-    font-family: 'Roboto Slab', serif;
-    color: #F5F5ED;
-}
 
-.maps {
-    display: flex;
-    margin: 1%;
-    justify-content: center;
-}
-
-button {
-    font-family: 'Roboto Slab', serif;
-}

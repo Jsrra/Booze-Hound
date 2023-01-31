@@ -31,10 +31,25 @@ function search(city) {
             console.log(breweries)
             console.log(breweries[0].latitude)
             console.log(breweries[0].longitude)
-            geoLocation(breweries[0].latitude, breweries[0].longitude, breweries[0].name)
+            geoLocation(breweries[0].latitude, breweries[0].longitude, breweries[0].name);
+            // var buttonValue = {
+            //     longitude: breweries[i].longitude, 
+            //     latitude: breweries[i].latitude,
+            //     barName: breweries[i].name,   
+            // }
+            // console.log('buttonValue :>> ', buttonValue);
+            // console.log('buttonValue :>> ', JSON.stringify(buttonValue));
             var results = document.getElementById("results");
             results.innerHTML = "";
             for (var i = 0; i < breweries.length; i++) {
+                var buttonValue = {
+                    longitude: breweries[i].longitude, 
+                    latitude: breweries[i].latitude,
+                    barName: breweries[i].name,   
+                }
+                buttonValue = JSON.stringify(buttonValue);
+                console.log('buttonValue :>> ', buttonValue);
+                // console.log('buttonValue :>> ', JSON.stringify(buttonValue));
                 var brewery = breweries[i];
                 results.innerHTML +=
                     "<div class='card'>" +
@@ -56,6 +71,7 @@ function search(city) {
                     "<a class='modal-trigger' href='#modal" +
                     i +
                     "'>More info</a>" +
+                    `<button value = '${buttonValue}' class = 'look-up-map'> Show Map </button>`
                     "</div>" +
                     "</div>" +
                     "<div id='modal" +
@@ -87,6 +103,17 @@ function search(city) {
             createButtons();
             var modals = document.querySelectorAll(".modal");
             M.Modal.init(modals);
+            var mapBtn = document.querySelectorAll('.look-up-map');
+            // for (i in mapBtn) {
+            //     i.addEventListener('click', handleMapSearch)
+            // }
+            for (let index = 0; index < mapBtn.length; index++) {
+                if (document.addEventListener) {
+                    mapBtn[index].addEventListener('click', handleMapSearch)
+                }
+                
+            }
+            console.log(mapBtn)
         });
 };
 // Get references to the search form and input field
@@ -116,8 +143,10 @@ function geoLocation(longitude, latitude, barName) {
         console.log(lat, lon);
 
         const currentCords = [longitude, latitude];
-
-        const map = L.map('map').setView(currentCords, 15);
+        if (map) {
+            map.remove();
+        }
+        let map = L.map('map').setView(currentCords, 15);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -190,3 +219,16 @@ function recallHistory(event) {
 }
 searchHistory.addEventListener("click", recallHistory)
 // cool
+
+function handleMapSearch (event){
+    console.log('test :>> ', 'test');
+    event.preventDefault();
+    console.log(event.target.value);
+    const value = JSON.parse(event.target.value);
+    geoLocation(value.longitude, value.latitude, value.barName);
+
+}
+// var mapBtn = document.querySelectorAll('.look-up-map');
+
+// mapBtn.addEventListener('click', handleMapSearch)
+

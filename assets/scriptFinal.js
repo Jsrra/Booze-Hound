@@ -145,11 +145,11 @@ resetButton.addEventListener("click", function (event) {
     event.preventDefault();
     searchInput.value = "";
     results.innerHTML = '';
-    localStorage.clear();
+    // localStorage.clear();
     searchInput.focus();
-    map = map.off();
-    map = map.remove();
-    location.reload();
+    // map = map.off();
+    // map = map.remove();
+    // location.reload();
 });
 
 

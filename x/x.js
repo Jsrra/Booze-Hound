@@ -71,7 +71,7 @@ function search(city) {
                     "<a class='modal-trigger' href='#modal" +
                     i +
                     "'>More info</a>" +
-                    `<button value = '${buttonValue}' class = 'look-up-map'> Show Map </button>`
+                    `<button value = '${buttonValue}' class = 'look-up-map'> Show Map </button>`+
                     "</div>" +
                     "</div>" +
                     "<div id='modal" +
@@ -143,10 +143,18 @@ function geoLocation(longitude, latitude, barName) {
         console.log(lat, lon);
 
         const currentCords = [longitude, latitude];
+        // if (map) {
+        //     map.remove();
+        // }
+        // let exam = document.querySelector('#map');
+        // exam.innerHTML = '';
+        
+        let map;
         if (map) {
-            map.remove();
-        }
-        let map = L.map('map').setView(currentCords, 15);
+             map.off();
+            }
+        // map.off();
+        map = L.map('map').setView(currentCords, 15);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -172,7 +180,6 @@ function geoLocation(longitude, latitude, barName) {
             const lat = mEvent.latlng.lat;
             const lng = mEvent.latlng.lng;
             // const {lat, lng} = mEvent.latlng;
-
 
         });
         // console.log(on);

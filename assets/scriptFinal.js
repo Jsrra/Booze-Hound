@@ -4,11 +4,13 @@ let barLon = "";
 document.getElementById("submit").addEventListener("click", handleSearchSubmit)
 
 function handleSearchSubmit(event) {
-    event.preventDefault();
+    event.preventDefault();    
     var city = document.getElementById("city").value;
     city.trim();
     console.log(city);
+    
     search(city)
+    
 }
 function search(city) {
 
@@ -127,6 +129,7 @@ function search(city) {
 
             }
             console.log(mapBtn)
+            
         });
 };
 // Get references to the search form and input field

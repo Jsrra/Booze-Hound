@@ -33,7 +33,7 @@ This responsive web application allows users to search for breweries/bars in a s
 ## Credits
 
 Team FiveLoopers:
-• Irakli Eradze (GitHub address)
+• Irakli Eradze (GitHub: ikaera)
 • JR Li (GitHub address)
 • Rances Rodriguez (GitHub address)
 • Joseph Serrato (GitHub address)

@@ -41,7 +41,7 @@ if (navigator.geolocation)
         // console.log(on);
 
     }, function () {
-        alert('It cannot find the current location.');
+        alert('The current location is not available.');
     });
 
 // <<<< openbrewerydb.org API >>>>>>

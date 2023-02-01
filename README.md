@@ -2,42 +2,41 @@
 
 ## Description
 
-This responsive web application allows users to search for breweries/bars in a specified city. Bars that users have previously looked up will be saved in their local storage for future reference.
+This responsive web application allows users to search for bars in a specified city. Bars that users have previously looked up will be saved in their local storage and displayed in the buttons below the map.
 
 ## User Story
 
 - AS A person that wants to easily discover new bars in any given location,
-- I WANT to be able to enter a city into a search field to surface information about the bars located in that city such as the name, address, and website,
+- I WANT to be able to enter a city into a search field to surface pertinent information about the bars located in that city such as the name, address, and website,
 - SO THAT I can make better informed decisions when ultimately deciding which establishment to patronize.
 
 ## Acceptance Criteria
 
 - GIVEN a dashboard with a search field
 - WHEN I enter a city
-- THEN the bars/breweries of that city will be displayed on the map as individual markers
+- THEN the bars of that city will be displayed on the map as individual markers
 - WHEN I click on a specific bar
-- THEN its key information such as the address, phone number, website link will be shown
+- THEN its key information such as the address, phone number, website link can be shown as well as its location on the map
 - THEN that bar, along with any other bars that were previously clicked on, will be stored in client-side storage as persistent data.
 
-## Usage **TO DO**
+## Usage
 
-• This dashboard allows users to search for a city to get pertinent information about its breweries/bars.
-• Once the city is entered, the map will display the locations of the breweries/bars in that city.
-• When the user clicks on one of the markers indicating a bar/brewery, a window will appear with its information such as the name, address and website.
-• Search history will be saved in local storage.
+• Once a city is entered into the search bar, a list of bars will be generated and as a default, the location of the first bar on the list will be displayed on the map.
+• Users can click on "MORE INFO" to have a modal popup appear with the selected bar's information and/or click on the "Show Map" button to have the location of that bar display on the map at the bottom of the page.
+• Search history will be saved in local storage and bars that were previously searched for will appear as buttons below the map.
 • This desktop app is mobile compatible.
 
-## Mock-Up **TO DO**
-![Deployed Website](./animation.gif)
+## Mock-Up
+![Deployed Website](./assets/animation.gif)
 
 ## Credits
 
-Team FiveLoopers:
-• Irakli Eradze (GitHub: ikaera)
-• JR Li (GitHub address)
-• Rances Rodriguez (GitHub address)
-• Joseph Serrato (GitHub address)
-• Xavier Teo (GitHub address)
+The Five Loopers:
+• Irakli Eradze (https://github.com/ikaera)
+• JR Li (https://github.com/NewJR666)
+• Rances Rodriguez (https://github.com/Caliza)
+• Joseph Serrato (https://github.com/Jsrra)
+• Xavier Teo (https://github.com/XvrTeo)
 
 ## Technology Use
 
@@ -48,7 +47,7 @@ Team FiveLoopers:
 ## License
 
 MIT License
-Copyright (c) [2023] [FiveLoopers]
+Copyright (c) [2023] [The Five Loopers]
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

@@ -26,8 +26,13 @@ This responsive web application allows users to search for bars in a specified c
 • Search history will be saved in local storage and bars that were previously searched for will appear as buttons below the map.
 • This desktop app is mobile compatible.
 
-## Mock-Up
+## Short Demo Animation
 ![Deployed Website](./assets/animation.gif)
+
+## Links
+
+• Deployed Application URL: https://jsrra.github.io/Booze-Hound/
+• Repository URL: https://github.com/Jsrra/Booze-Hound
 
 ## Credits
 
@@ -38,7 +43,7 @@ The Five Loopers:
 • Joseph Serrato (https://github.com/Jsrra)
 • Xavier Teo (https://github.com/XvrTeo)
 
-## Technology Use
+## Technology Used
 
 • Materialize CSS
 • 1st server-side API: Open Brewery DB (https://www.openbrewerydb.org/)

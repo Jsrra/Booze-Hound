@@ -26,7 +26,7 @@ This responsive web application allows users to search for bars in a specified c
 • Search history will be saved in local storage and bars that were previously searched for will appear as buttons below the map.
 • This desktop app is mobile compatible.
 
-## Mock-Up **TO DO**
+## Mock-Up
 ![Deployed Website](./assets/animation.gif)
 
 ## Credits

@@ -10,7 +10,7 @@ function handleSearchSubmit(event) {
     console.log(city);
     
     search(city)
-    
+    document.getElementById("city").reset();
 }
 function search(city) {
 
@@ -223,13 +223,21 @@ function geoLocation(longitude, latitude, barName) {
 const searchHistory = document.querySelector("#search-history")
 
 function saveToStorage(cityName) {
-    var savedCities = JSON.parse(localStorage.getItem("saved-city")) || []
+    const savedCities = JSON.parse(localStorage.getItem("saved-city")) || []
     console.log(savedCities.includes(cityName))
     if (savedCities.includes(cityName)) {
         return 0;
     }
     savedCities.push(cityName)
+    if (savedCities.length>5) {
+        savedCities.shift();
+    }
+    console.log(savedCities.length);
+    console.log(savedCities)
+
+    
     localStorage.setItem("saved-city", JSON.stringify(savedCities))
+    createButtons();
 }
 function createButtons() {
     searchHistory.innerHTML = ""
@@ -267,6 +275,9 @@ function handleMapSearch(event) {
     geoLocation( value.latitude, value.longitude, value.barName);
 
 }
+
+createButtons();
+
 // var mapBtn = document.querySelectorAll('.look-up-map');
 
 // mapBtn.addEventListener('click', handleMapSearch)

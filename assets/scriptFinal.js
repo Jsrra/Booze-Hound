@@ -1,3 +1,4 @@
+"use strict"
 let barLat = "";
 let barLon = "";
 
@@ -5,16 +6,22 @@ document.getElementById("submit").addEventListener("click", handleSearchSubmit)
 
 function handleSearchSubmit(event) {
     event.preventDefault();    
-    var city = document.getElementById("city").value;
-    city.trim();
+    let city = document.getElementById("city")
+        .value.trim()
+        .toLowerCase()
+        .split(' ')
+        .map((s) => s.charAt(0)
+        .toUpperCase() + s.substring(1))
+        .join(' ');
     console.log(city);
     
     search(city)
-    document.getElementById("city").reset();
+    
 }
 function search(city) {
-
-    if (!city) {
+    let pattern = /[A-z]/;
+    //check if entered city contains letters.
+    if (!pattern.test(city)) {
         return
     }
     saveToStorage(city)
@@ -242,7 +249,7 @@ function saveToStorage(cityName) {
 function createButtons() {
     searchHistory.innerHTML = ""
     var savedCities = JSON.parse(localStorage.getItem("saved-city")) || []
-    for (i = 0; i < savedCities.length; i++) {
+    for (let i = 0; i < savedCities.length; i++) {
         var newButton = document.createElement("button")
         newButton.textContent = savedCities[i]
         newButton.value = savedCities[i]

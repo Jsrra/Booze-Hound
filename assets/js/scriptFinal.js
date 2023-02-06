@@ -5,18 +5,17 @@ let barLon = "";
 document.getElementById("submit").addEventListener("click", handleSearchSubmit)
 
 function handleSearchSubmit(event) {
-    event.preventDefault();    
+    event.preventDefault();
     let city = document.getElementById("city")
         .value.trim()
         .toLowerCase()
         .split(' ')
         .map((s) => s.charAt(0)
-        .toUpperCase() + s.substring(1))
+            .toUpperCase() + s.substring(1))
         .join(' ');
     console.log(city);
-    
+
     search(city)
-    
 }
 function search(city) {
     let pattern = /[A-z]/;
@@ -33,7 +32,6 @@ function search(city) {
             barLat = data[0].latitude
             barLon = data[0].longitude
             console.log(barLat, barLon)
-
         })
         .then(function render(breweries) {
             console.log(breweries)
@@ -120,7 +118,6 @@ function search(city) {
                     "<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>" +
                     "</div>" +
                     "</div>";
-
             }
             createButtons();
             var modals = document.querySelectorAll(".modal");
@@ -136,7 +133,7 @@ function search(city) {
 
             }
             console.log(mapBtn)
-            
+
         });
 };
 // Get references to the search form and input field
@@ -162,13 +159,9 @@ resetButton.addEventListener("click", function (event) {
     // location.reload();
 });
 
-
-
 let map;
-
 // map = map.off();
 // map = map.remove();
-
 // map.off();
 function geoLocation(longitude, latitude, barName) {
 
@@ -218,7 +211,6 @@ function geoLocation(longitude, latitude, barName) {
         const lat = mEvent.latlng.lat;
         const lng = mEvent.latlng.lng;
         // const {lat, lng} = mEvent.latlng;
-
     });
     // console.log(on);
 
@@ -236,13 +228,13 @@ function saveToStorage(cityName) {
         return 0;
     }
     savedCities.push(cityName)
-    if (savedCities.length>5) {
+    if (savedCities.length > 5) {
         savedCities.shift();
     }
     console.log(savedCities.length);
     console.log(savedCities)
 
-    
+
     localStorage.setItem("saved-city", JSON.stringify(savedCities))
     createButtons();
 }
@@ -260,7 +252,6 @@ function createButtons() {
         // })
         searchHistory.append(newButton)
     }
-
 }
 ;
 function recallHistory(event) {
@@ -279,8 +270,7 @@ function handleMapSearch(event) {
     console.log(event.target.value);
     const value = JSON.parse(event.target.value);
     console.log(value.longitude, value.latitude, value.barName);
-    geoLocation( value.latitude, value.longitude, value.barName);
-
+    geoLocation(value.latitude, value.longitude, value.barName);
 }
 
 createButtons();

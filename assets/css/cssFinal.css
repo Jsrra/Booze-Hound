@@ -4,9 +4,11 @@
     --color-map-3: rgb(214, 222, 224);
 }
 
-.container {
-    margin-top: 50px;
-    padding: 20px;
+body {
+    /* background-color: #aaa; */
+    /* background-color: aquamarine; */
+    background: url(../images/bars.webp) no-repeat center;
+    background-size: cover;
 }
 
 /* Styling for search form */
@@ -17,6 +19,31 @@ form {
 
 input[type="text"] {
     width: 50%;
+}
+
+
+#city {
+    color: aquamarine;
+    font-size: 1.5rem;
+}
+
+/* Map css */
+#map {
+    height: 70vh;
+    background-color: var(--color-map-background-1);
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.container h1 {
+    /* text-align: center; */
+    color:beige;
+    text-shadow: #ececec;
+    font-weight: bolder;
+
 }
 
 .card:hover {
@@ -46,23 +73,9 @@ input[type="text"] {
     color: white;
 }
 
-/* Map css */
-
-#map {
-    height: 70vh;
-    background-color: var(--color-map-background-1);
-}
-
 .beer-popup {
     background-color: rgb(175, 5, 5);
     color: whitesmoke;
     border-radius: 5px;
     padding-right: 0.4rem;
 }
-
-body {
-    /* background-color: #aaa; */
-    background-color: aquamarine;
-}
-
-/* cool */

@@ -27,7 +27,7 @@ This responsive web application allows users to search for bars in a specified c
 • This desktop app is mobile compatible.
 
 ## Short Demo Animation
-![Deployed Website](./assets/animation.gif)
+![Deployed Website](./assets/images/animation.gif)
 
 ## Links
 

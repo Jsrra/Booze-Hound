@@ -1,6 +1,7 @@
 "use strict"
 let barLat = "";
 let barLon = "";
+let difaultCity = 'Manhattan'
 
 document.getElementById("submit").addEventListener("click", handleSearchSubmit)
 
@@ -35,8 +36,8 @@ function search(city) {
         })
         .then(function render(breweries) {
             console.log(breweries)
-            console.log(breweries[0].latitude)
-            console.log(breweries[0].longitude);
+            // console.log(breweries[0].latitude)
+            // console.log(breweries[0].longitude);
             // if (breweries === null || 
             //     !breweries[0].latitude || breweries[0].latitude === 'null'
             //     || !breweries[0].longitude || breweries[0].longitude === 'null'
@@ -164,12 +165,17 @@ let map;
 // map = map.remove();
 // map.off();
 function geoLocation(longitude, latitude, barName) {
-
+    console.log(map);
+    if (!longitude || !latitude) {
+        alert("Coords cannot be found!")
+        return
+    }
     // navigator.geolocation.getCurrentPosition(function (myPosition) {
 
     //     const lat = myPosition.coords.latitude;
     //     const lon = myPosition.coords.longitude;
     //     console.log(lat, lon);
+    // })
 
     const currentCords = [longitude, latitude];
     // if (map) {
@@ -181,12 +187,13 @@ function geoLocation(longitude, latitude, barName) {
 
 
     if (map) {
-        //  map = map.off();
+        map = map.off();
         map = map.remove();
     }
+    console.log(map);
     // map.off();
     map = L.map('map').setView(currentCords, 17);
-
+    console.log(map);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -279,51 +286,52 @@ createButtons();
 
 // mapBtn.addEventListener('click', handleMapSearch)
 
-// window.onload = function () {
-//     if (navigator.geolocation)
-//         navigator.geolocation.getCurrentPosition(function (myPosition) {
+window.onload = function () {
+    if (navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(function (myPosition) {
 
-//             const lat = myPosition.coords.latitude;
-//             const lon = myPosition.coords.longitude;
-//             // console.log(lat, lon);
+            const lat = myPosition.coords.latitude;
+            const lon = myPosition.coords.longitude;
+            // console.log(lat, lon);
 
-//             const currentCords = [lat, lon];
+            const currentCords = [lat, lon];
+            geoLocation(lat, lon);
+            // var map = L.map('map').setView(currentCords, 15);
 
-//             var map = L.map('map').setView(currentCords, 15);
-
-//             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//             }).addTo(map);
+            // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            // }).addTo(map);
 
 
-//             // const latitude = data.list
+            // const latitude = data.list
 
-//             //use Leaflet method `on()`
-//             map.on('click', function (mEvent) {
-//                 console.log(mEvent);
-//                 const lat = mEvent.latlng.lat;
-//                 const lng = mEvent.latlng.lng;
-//                 // const {lat, lng} = mEvent.latlng;
+            //use Leaflet method `on()`
+            // map.on('click', function (mEvent) {
+            //     console.log(mEvent);
+            //     const lat = mEvent.latlng.lat;
+            //     const lng = mEvent.latlng.lng;
+            //     // const {lat, lng} = mEvent.latlng;
 
-//                 L.marker([lat, lng])
-//                     .addTo(map)
-//                     .bindPopup(L.popup({
-//                         maxWidth: 260,
-//                         minWidth: 90,
-//                         autoClose: false,
-//                         closeOnClick: false,
-//                         className: 'beer-popup',
+            //     L.marker([lat, lng])
+            //         .addTo(map)
+            //         .bindPopup(L.popup({
+            //             maxWidth: 260,
+            //             minWidth: 90,
+            //             autoClose: false,
+            //             closeOnClick: false,
+            //             className: 'beer-popup',
 
-//                     }))
-//                     .setPopupContent('Beer Bar')
-//                     .openPopup();
-//             });
-//             // console.log(on);
+            //         }))
+            //         .setPopupContent('Beer Bar')
+            //         .openPopup();
+            // });
+            // // console.log(on);
 
-//         }, function () {
-//             alert('The current location is not available.');
-//         });
-// }
+        }, function () {
+            geoLocation('37.3361905', "-121.8905833", "Ale House Brewing Co")
+            alert('The current location is not available.');
+        });
+}
 
 // var map;
 

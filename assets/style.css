@@ -1,0 +1,81 @@
+:root {
+    --color-map-background-1: #aaa;
+    --color-map-2: #ececec;
+    --color-map-3: rgb(214, 222, 224);
+}
+
+body {
+    /* background-color: #aaa; */
+    /* background-color: aquamarine; */
+    background: url(travel.jpg) no-repeat center;
+    background-size: cover;
+}
+
+/* Styling for search form */
+form {
+    display: flex;
+    justify-content: center;
+}
+
+input[type="text"] {
+    width: 50%;
+}
+
+
+#city {
+    color: aquamarine;
+    font-size: 1.5rem;
+}
+
+/* Map css */
+#map {
+    height: 70vh;
+    background-color: var(--color-map-background-1);
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.container h1 {
+    /* text-align: center; */
+    color:beige;
+    text-shadow: #ececec;
+    font-weight: bolder;
+
+}
+
+.card:hover {
+    box-shadow: 2px 2px 10px gray;
+    cursor: pointer;
+}
+
+.card-action a {
+    color: #4DB6AC;
+    /* Materialize accent color */
+}
+
+/* Styling for modal */
+.modal {
+    max-height: 85%;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+
+.modal h4 {
+    margin-bottom: 20px;
+}
+
+.modal-footer a {
+    background-color: #4DB6AC;
+    color: white;
+}
+
+.beer-popup {
+    background-color: rgb(175, 5, 5);
+    color: whitesmoke;
+    border-radius: 5px;
+    padding-right: 0.4rem;
+}

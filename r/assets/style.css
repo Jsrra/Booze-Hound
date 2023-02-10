@@ -2,6 +2,10 @@ img {
     margin-top: 8px;
 }
 
+body {
+    background-image: linear-gradient(to left, rgb(3, 44, 106), rgb(70, 164, 247));
+}
+
 input {
     border: solid 1px #44638a;
     border-radius: 4px;

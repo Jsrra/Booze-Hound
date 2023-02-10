@@ -11,10 +11,12 @@ const cityBreweries = []
 const searchFeedBack = document.getElementById('search-feedBack')
 const showButton = document.querySelector('.show-button')
 const showInput = document.querySelector('.show-input')
+let state = ''
 
 dropdownEl.addEventListener('click', function (event) {
-    let state = event.target.innerText;
-    fetchBreweries(state)
+    state = event.target.getAttribute('data-state');
+    console.log(state);
+    fetchBreweries()
     // console.log(event); 
     console.log(event.target.innerText);
     console.log(event.target.value)
@@ -24,20 +26,34 @@ dropdownEl.addEventListener('click', function (event) {
 
 searchCity.addEventListener('click', handleCitySearch)
 
-function fetchBreweries(state) {
-    let apiUrlBreweries = `https://api.openbrewerydb.org/breweries?by_state=${state}`;
+function fetchBreweries() {
+    const apiUrlBreweries = `https://api.openbrewerydb.org/breweries?by_state=${state}`;
     fetch(apiUrlBreweries).then(function (response) {
         console.log(response);
         console.log(response.json);
 
         return response.json()
     }).then(function (data) {
-        console.log(data);
+        console.log(data, 'beta');
         data.forEach(brewery => {
             breweries.push(brewery)
         })
         displayBrewery(data)
+        console.log(breweries);
     })
+}
+
+function fetchBreweriesByCity(city) {
+    let apiUrlBrewery = `https://api.openbrewerydb.org/breweries?by_city=${city}&by_state=${state}`;
+    fetch(apiUrlBrewery).then(function (response) {
+        console.log(response);
+        console.log(response.json);
+
+        return response.json()
+    }).then(function (data) {
+        console.log(data);
+    })
+    // displayBrewery(data)
 }
 
 function handleCitySearch() {
@@ -46,14 +62,15 @@ function handleCitySearch() {
 }
 
 function searchBreweryByCity(city) {
-
+    cityBreweries.splice(0, cityBreweries.length);
     for (let i = 0; i < breweries.length; i++) {
         if (breweries[i].city === city) {
             cityBreweries.push(breweries[i])
         }
     }
     console.log(cityBreweries);
-    displayBrewereyByCity()
+    displayBrewery(cityBreweries)
+    displayNoCityAlert()
 }
 
 function displayBrewery(data) {
@@ -75,7 +92,7 @@ function displayBrewery(data) {
         let brew3 = document.createElement('p')
         brew3.textContent = data[i].street
         let brew4 = document.createElement('p')
-        brew4.textContent = data[i].city+',  '+data[i].state+': '+data[i].postal_code
+        brew4.textContent = `${data[i].city}, ${data[i].state}: ${data[i].postal_code}`
         cardHeader.append(brew2)
         cardBody.append(brew3, brew4)
         card.append(cardHeader, cardBody)
@@ -87,7 +104,12 @@ function displayBrewery(data) {
 
 }
 
-function displayBrewereyByCity() {
+//displays breweries by city
+// function displayCities(data) {
+    
+// }
+
+function displayNoCityAlert() {
     if (cityBreweries.length === 0) {
         searchFeedBack.classList.remove('hide')
         setTimeout(function () {           

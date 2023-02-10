@@ -13,18 +13,7 @@ const showButton = document.querySelector('.show-button')
 const showInput = document.querySelector('.show-input')
 let state = ''
 
-dropdownEl.addEventListener('click', function (event) {
-    state = event.target.getAttribute('data-state');
-    console.log(state);
-    fetchBreweries()
-    // console.log(event); 
-    console.log(event.target.innerText);
-    console.log(event.target.value)
-    showButton.classList.remove('hide')
-    showInput.classList.remove('hide')
-});
-
-searchCity.addEventListener('click', handleCitySearch)
+//fetches state state data from openbrewerydb api.
 
 function fetchBreweries() {
     const apiUrlBreweries = `https://api.openbrewerydb.org/breweries?by_state=${state}`;
@@ -43,6 +32,8 @@ function fetchBreweries() {
     })
 }
 
+//fetches state city data from openbrewerydb api.
+
 function fetchBreweriesByCity(city) {
     let apiUrlBrewery = `https://api.openbrewerydb.org/breweries?by_city=${city}&by_state=${state}`;
     fetch(apiUrlBrewery).then(function (response) {
@@ -53,7 +44,6 @@ function fetchBreweriesByCity(city) {
     }).then(function (data) {
         console.log(data);
     })
-    // displayBrewery(data)
 }
 
 function handleCitySearch() {
@@ -73,6 +63,8 @@ function searchBreweryByCity(city) {
     displayNoCityAlert()
 }
 
+//displays breweries by state from dropdown menu then by breweries by city when city is entered in input field.
+
 function displayBrewery(data) {
 
     breweryList.innerHTML = ''
@@ -82,11 +74,6 @@ function displayBrewery(data) {
         let card = document.createElement('div');
         cardBody.classList.add('cardBody')
         card.classList.add('brewClass')
-        // brewName1.textContent = data[i].name
-        // brewAddress1.textContent = data[i].street
-        // brewCity1.textContent = data[i].city
-        // brewState1.textContent =', ' +data[i].state 
-        // brewName2.textContent = data[i].name 
         let brew2 = document.createElement('p')
         brew2.textContent = data[i].name
         let brew3 = document.createElement('p')
@@ -97,17 +84,12 @@ function displayBrewery(data) {
         cardBody.append(brew3, brew4)
         card.append(cardHeader, cardBody)
         breweryList.append(card)
-
-        // console.log(brew2, 'beta');
     }
 
 
 }
 
-//displays breweries by city
-// function displayCities(data) {
-    
-// }
+//If city does not exist in state, sends alert message.
 
 function displayNoCityAlert() {
     if (cityBreweries.length === 0) {
@@ -118,6 +100,18 @@ function displayNoCityAlert() {
     }
 }
 
+//Event listner that handles dropdown menu.
 
+dropdownEl.addEventListener('click', function (event) {
+    state = event.target.getAttribute('data-state');
+    console.log(state);
+    fetchBreweries() 
+    console.log(event.target.innerText);
+    console.log(event.target.value)
+    showButton.classList.remove('hide')
+    showInput.classList.remove('hide')
+});
 
+//Event listner for city input field.
 
+searchCity.addEventListener('click', handleCitySearch)
